@@ -1,9 +1,10 @@
-# primera version
+
 
 # JPQL
 
 ```sql
 select E from Entidad E
+select Entidad from Entidad -- sin alias no es recomendado.
 select E from Entidad as E
 ```
 * select = devolver valores
@@ -55,3 +56,21 @@ select E from Entidad E where E.campo='hola' order by E.campo
 * from
 * where (opcional)
 * order by (opcional)
+
+
+
+## Como agregar en el código
+
+Dentro de la interface Repo, agregar lo siguiente:
+
+```java
+@Query(value = "select C from Ciudad C order by C.name") // JPQL es similar a SQL
+List<Ciudad> ordenarPorNombre();
+```
+
+## Como agregar un parámetro
+
+```java
+@Query(value = "select C from Ciudad C where C.pais.name=:nombrePais") // JPQL es similar a SQL
+List<Ciudad> listarPorPais(@Param("nombrePais") String nombrePais);
+```

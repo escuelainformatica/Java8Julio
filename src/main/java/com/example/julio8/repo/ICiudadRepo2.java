@@ -3,6 +3,7 @@ package com.example.julio8.repo;
 import com.example.julio8.entidades.Ciudad;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -20,5 +21,8 @@ public interface ICiudadRepo2 extends PagingAndSortingRepository<Ciudad,Integer>
 
     @Query(value = "select C from Ciudad C where C.pais.name='Chile'") // JPQL es similar a SQL
     List<Ciudad> listarChile();
+
+    @Query(value = "select C from Ciudad C where C.pais.name=:nombrePais") // JPQL es similar a SQL
+    List<Ciudad> listarPorPais(@Param("nombrePais") String nombrePais);
 
 }
